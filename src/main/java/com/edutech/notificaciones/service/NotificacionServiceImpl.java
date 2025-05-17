@@ -2,6 +2,12 @@ package com.edutech.notificaciones.service;
 
 import com.edutech.notificaciones.dto.NotificacionDTO;
 import com.edutech.notificaciones.model.Notificacion;
+import com.edutech.notificaciones.repository.NotificacionRepository;
+
+import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,44 +17,34 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
+@RequiredArgsConstructor
 public class NotificacionServiceImpl implements NotificacionService {
-    private final List<Notificacion> notificaciones = new ArrayList<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
 
+    private final NotificacionRepository notificacionRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(NotificacionServiceImpl.class);
     @Override
     public List<Notificacion> obtenerTodas() {
-        return new ArrayList<>(notificaciones);
+        return notificacionRepository.findAll();
     }
 
     @Override
-    public Notificacion obtenerPorId(Long id) {
-        return notificaciones.stream()
-                .filter(n -> n.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+    public Notificacion obtenerPorId(String id) {
+        return null;
     }
 
     @Override
     public Notificacion crear(Notificacion notificacion) {
-        notificacion.setId(idGenerator.getAndIncrement());
-        notificacion.setFechaCreacion(LocalDateTime.now());
-        notificacion.setLeido(false);
-        notificaciones.add(notificacion);
-        return notificacion;
+        return null;
     }
 
     @Override
     public void eliminar(Long id) {
-        notificaciones.removeIf(n -> n.getId().equals(id));
     }
 
     @Override
     public Notificacion marcarComoLeida(Long id) {
-        Optional<Notificacion> opt = notificaciones.stream()
-                .filter(n -> n.getId().equals(id))
-                .findFirst();
-        opt.ifPresent(n -> n.setLeido(true));
-        return opt.orElse(null);
+        return null;
     }
 
     @Override

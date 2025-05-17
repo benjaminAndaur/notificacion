@@ -22,7 +22,7 @@ public class NotificacionesController {
     }
 
     @GetMapping("/{id}")
-    public NotificacionDTO obtenerPorId(@PathVariable Long id) {
+    public NotificacionDTO obtenerPorId(@PathVariable String id) {
         Notificacion notificacion = notificacionService.obtenerPorId(id);
         NotificacionDTO notificacionDTO = notificacionService.converterDTO(notificacion);
 

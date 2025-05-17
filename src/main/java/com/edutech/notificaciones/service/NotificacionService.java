@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface NotificacionService {
     List<Notificacion> obtenerTodas();
-    Notificacion obtenerPorId(Long id);
+    Notificacion obtenerPorId(String id);
     Notificacion crear(Notificacion notificacion);
     void eliminar(Long id);
     Notificacion marcarComoLeida(Long id);
