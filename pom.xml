@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     
-    <!-- ========== METADATOS BÁSICOS ========== -->
+    <!-- ===== Metadatos básicos ===== -->
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.5</version>
-        <relativePath/> <!-- Busca el parent en el repositorio -->
+        <version>3.2.5</version> <!-- Versión compatible con Java 21 -->
+        <relativePath/>
     </parent>
 
     <groupId>com.edutech</groupId>
@@ -18,16 +18,17 @@
     <name>notificaciones</name>
     <description>Demo project for Spring Boot</description>
 
-    <!-- ========== CONFIGURACIONES GLOBALES ========== -->
+    <!-- ===== Configuraciones globales ===== -->
     <properties>
-        <java.version>24</java.version> <!-- Versión de Java -->
+        <java.version>21</java.version> <!-- Cambiado a Java 21 LTS -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <lombok.version>1.18.30</lombok.version>
     </properties>
 
-    <!-- ========== DEPENDENCIAS ========== -->
+    <!-- ===== Dependencias ===== -->
     <dependencies>
-        <!-- Spring Boot -->
+        <!-- Spring Boot Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -36,7 +37,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-        
+
         <!-- Desarrollo -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -47,9 +48,10 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
-        
+
         <!-- Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -58,10 +60,10 @@
         </dependency>
     </dependencies>
 
-    <!-- ========== CONFIGURACIÓN DE BUILD ========== -->
+    <!-- ===== Configuración de Build ===== -->
     <build>
         <plugins>
-            <!-- Plugin para Java 24 -->
+            <!-- Maven Compiler Plugin para Java 21 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -73,13 +75,13 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.30</version>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            
-            <!-- Plugin de Spring Boot -->
+
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -94,20 +96,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <!-- ========== METADATOS OPCIONALES (limpiados) ========== -->
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
 
 </project>
