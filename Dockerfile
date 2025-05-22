@@ -1,14 +1,25 @@
-# Usa una imagen base de Java (ajusta la versión)
-FROM eclipse-temurin:21-jdk-jammy
+# Build stage
+FROM eclipse-temurin:21-jdk-jammy as builder
 
-# Directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copia el JAR al contenedor (cambia el nombre según tu .jar)
-COPY target/notificaciones-0.0.1-SNAPSHOT.jar app.jar
+# 1. Copia solo los archivos necesarios para descargar dependencias
+COPY pom.xml .
+COPY .mvn .mvn
+COPY mvnw .
 
-# Puerto que usa tu aplicación (cambia si es necesario)
+# 2. Descarga dependencias primero (esto crea cache en Docker)
+RUN ./mvnw dependency:go-offline
+
+# 3. Copia el resto del código fuente
+COPY src src
+
+# 4. Construye la aplicación
+RUN ./mvnw clean package -DskipTests
+
+# Runtime stage
+FROM eclipse-temurin:21-jre-jammy
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
