@@ -11,10 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 @RequiredArgsConstructor
@@ -30,20 +28,29 @@ public class NotificacionServiceImpl implements NotificacionService {
 
     @Override
     public Notificacion obtenerPorId(String id) {
-        return null;
+        return notificacionRepository.findById(id).orElse(null);
     }
 
     @Override
     public Notificacion crear(Notificacion notificacion) {
-        return null;
+        notificacion.setFechaCreacion(LocalDateTime.now().toString());
+        notificacion.setLeido(false);
+        return notificacionRepository.save(notificacion);
     }
 
     @Override
     public void eliminar(Long id) {
+        notificacionRepository.deleteById(String.valueOf(id));
     }
 
     @Override
     public Notificacion marcarComoLeida(Long id) {
+        Optional<Notificacion> opt = notificacionRepository.findById(String.valueOf(id));
+        if (opt.isPresent()) {
+            Notificacion notificacion = opt.get();
+            notificacion.setLeido(true);
+            return notificacionRepository.save(notificacion);
+        }
         return null;
     }
 
