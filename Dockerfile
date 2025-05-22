@@ -1,5 +1,5 @@
 # Build stage
-FROM eclipse-temurin:24-jdk-jammy as builder
+FROM eclipse-temurin:21-jdk-jammy as builder
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY src src
 RUN ./mvnw clean package -DskipTests
 
 # Runtime stage
-FROM eclipse-temurin:24-jre-jammy
+FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
