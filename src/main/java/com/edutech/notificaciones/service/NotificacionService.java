@@ -8,7 +8,7 @@ public interface NotificacionService {
     List<Notificacion> obtenerTodas();
     Notificacion obtenerPorId(String id);
     Notificacion crear(Notificacion notificacion);
-    void eliminar(Long id);
-    Notificacion marcarComoLeida(Long id);
+    void eliminar(String id);
+    Notificacion marcarComoLeida(String id);
     NotificacionDTO converterDTO(Notificacion notificacion);
 }

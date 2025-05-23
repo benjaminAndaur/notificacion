@@ -39,12 +39,12 @@ public class NotificacionServiceImpl implements NotificacionService {
     }
 
     @Override
-    public void eliminar(Long id) {
+    public void eliminar(String id) {
         notificacionRepository.deleteById(String.valueOf(id));
     }
 
     @Override
-    public Notificacion marcarComoLeida(Long id) {
+    public Notificacion marcarComoLeida(String id) {
         Optional<Notificacion> opt = notificacionRepository.findById(String.valueOf(id));
         if (opt.isPresent()) {
             Notificacion notificacion = opt.get();

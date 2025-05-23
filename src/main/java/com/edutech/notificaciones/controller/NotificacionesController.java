@@ -35,12 +35,12 @@ public class NotificacionesController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Long id) {
+    public void eliminar(@PathVariable String id) {
         notificacionService.eliminar(id);
     }
 
     @PutMapping("/{id}/leida")
-    public Notificacion marcarComoLeida(@PathVariable Long id) {
+    public Notificacion marcarComoLeida(@PathVariable String id) {
         return notificacionService.marcarComoLeida(id);
     }
 }
