@@ -44,6 +44,8 @@ public class NotificacionServiceImpl implements NotificacionService {
         throw new RuntimeException("Notificación no encontrada con ID: " + id);
     }
     notificacionRepository.deleteById(id);
+    logger.info("Notificación eliminada con ID: {}", id);
+
 }
 
     @Override
