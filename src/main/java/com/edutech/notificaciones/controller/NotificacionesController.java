@@ -3,6 +3,8 @@ package com.edutech.notificaciones.controller;
 import com.edutech.notificaciones.dto.NotificacionDTO;
 import com.edutech.notificaciones.model.Notificacion;
 import com.edutech.notificaciones.service.NotificacionService;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,9 +37,10 @@ public class NotificacionesController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable String id) {
+    public ResponseEntity<Void> eliminar(@PathVariable String id) {
         notificacionService.eliminar(id);
-    }
+        return ResponseEntity.noContent().build();
+}
 
     @PutMapping("/{id}/leida")
     public Notificacion marcarComoLeida(@PathVariable String id) {

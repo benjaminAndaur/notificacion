@@ -40,8 +40,11 @@ public class NotificacionServiceImpl implements NotificacionService {
 
     @Override
     public void eliminar(String id) {
-        notificacionRepository.deleteById(String.valueOf(id));
+        if (!notificacionRepository.existsById(id)) {
+        throw new RuntimeException("Notificación no encontrada con ID: " + id);
     }
+    notificacionRepository.deleteById(id);
+}
 
     @Override
     public Notificacion marcarComoLeida(String id) {
